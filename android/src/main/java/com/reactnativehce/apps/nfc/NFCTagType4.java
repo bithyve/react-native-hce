@@ -26,7 +26,7 @@ public class NFCTagType4 implements IHCEApplication {
   private final HceViewModel hceModel;
 
   private SelectedFile selectedFile = null;
-  public final byte[] ndefDataBuffer = new byte[0xFFFE];
+  public final byte[] ndefDataBuffer = new byte[0x7FFF];
   public final byte[] ccDataBuffer = new byte[15];
 
   private enum SelectedFile {
@@ -49,7 +49,7 @@ public class NFCTagType4 implements IHCEApplication {
 
   private void setUpCapabilityContainerContent() {
     System.arraycopy(CC_HEADER, 0, this.ccDataBuffer, 0, CC_HEADER.length);
-    byte[] controlTlv = BinaryUtils.HexStringToByteArray("0406E104FFFE00" + (prefManager.getWritable() ? "00":"FF"));
+    byte[] controlTlv = BinaryUtils.HexStringToByteArray("0406E1047FFF00" + (prefManager.getWritable() ? "00":"FF"));
     System.arraycopy(controlTlv, 0, this.ccDataBuffer, CC_HEADER.length, controlTlv.length);
   }
 
